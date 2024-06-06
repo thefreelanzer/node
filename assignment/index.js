@@ -1,5 +1,5 @@
 const http = require("node:http");
-const file = require("node:fs");
+const fs = require("node:fs");
 const deleteFiles = require("./delete-files");
 const Logging = require("./logging");
 
@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
       break;
     case "/read-file":
       res.writeHead(200, { "Content-Type": "text/plain" });
-      file.ReadStream("./file.txt").pipe(res);
+      fs.createReadStream("./file.txt").pipe(res);
       break;
     case "/delete-files":
       deleteFiles("temp");
@@ -77,5 +77,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(3000, () => {
-  console.log("Server running in port number 3000");
+  console.log("Server running on port number 3000");
 });
